@@ -1,6 +1,6 @@
 import React from 'react';
 import { createContext, useEffect } from 'react';
-import { getAuth, onAuthStateChanged, signInWithPopup } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithPopup, signOut } from "firebase/auth";
 import app from '../../fairbase/fairbase.config';
 import { useState } from 'react';
 
@@ -11,9 +11,15 @@ const auth = getAuth(app);
 
 const AuthProvider = ({children}) => {
     const [user,  setUser] = useState(null)
-    
+
+    const createUser =(email, password)=>{
+        return createUserWithEmailAndPassword(auth, email, password)
+    }
     const googleLogin =(provider) =>{
         return signInWithPopup(auth, provider);
+    }
+    const logOut = ()=>{
+        return signOut(auth);
     }
 
     useEffect(() =>{
@@ -29,7 +35,7 @@ const AuthProvider = ({children}) => {
 
 
 
-    const authInfo = { user, googleLogin };
+    const authInfo = { user, googleLogin, logOut, createUser };
     return (
       <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
     );

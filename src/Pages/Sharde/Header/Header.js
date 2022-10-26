@@ -4,7 +4,6 @@ import { Button, Image } from 'react-bootstrap';
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import NavDropdown from "react-bootstrap/NavDropdown";
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../context/AuthProvider/AuthProvider';
 import SideNav from '../SideNav/SideNav';
@@ -20,8 +19,10 @@ const Header = () => {
     </Tooltip>
   );
 
-  const { user, googleLogin } = useContext(AuthContext);
+  const { user, googleLogin, logOut } = useContext(AuthContext);
+
   const googleProvider = new GoogleAuthProvider();
+
   const handelGoogleLogin =() =>{
         googleLogin(googleProvider)
         .then(result =>{
@@ -29,6 +30,13 @@ const Header = () => {
         })
         .catch(error => console.error(error))
   }
+
+  const handelLogOut = () =>{
+      logOut()
+      .then(() => {})
+      .catch(error => console.error(error))
+  }
+
 
     return (
       <div className="mb-4">
@@ -45,23 +53,34 @@ const Header = () => {
                 <Button onClick={handelGoogleLogin} variant="warning">
                   Google Login
                 </Button>
-                <Nav.Link href="#pricing">Pricing</Nav.Link>
-                <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
-                  <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-                  <NavDropdown.Item href="#action/3.2">
-                    Another action
-                  </NavDropdown.Item>
-                  <NavDropdown.Item href="#action/3.3">
-                    Something
-                  </NavDropdown.Item>
-                  <NavDropdown.Divider />
-                  <NavDropdown.Item href="#action/3.4">
-                    Separated link
-                  </NavDropdown.Item>
-                </NavDropdown>
               </Nav>
+
               <Nav>
-                <Nav.Link>{user?.displayName}</Nav.Link>
+                <Nav.Link>
+                  {user?.uid ? (
+                    <>
+                      <Button
+                        onClick={handelLogOut}
+                        variant="warning"
+                        size="sm"
+                      >
+                        Logout
+                      </Button>{" "}
+                      <span>{user?.displayName}</span>
+                    </>
+                  ) : (
+                    <>
+                      <Button variant="warning">
+                        <Link bg="" to="/login">
+                          Login
+                        </Link>
+                      </Button>{" "}
+                      <Button variant="warning">
+                        <Link to="/register">Register</Link>
+                      </Button>{" "}
+                    </>
+                  )}
+                </Nav.Link>
                 <Nav.Link eventKey={2} href="#memes">
                   {user?.photoURL ? (
                     <OverlayTrigger
