@@ -1,4 +1,4 @@
-import { GoogleAuthProvider } from 'firebase/auth';
+import { GithubAuthProvider, GoogleAuthProvider } from 'firebase/auth';
 import React, { useContext } from 'react';
 import { Button, Image } from 'react-bootstrap';
 import Container from "react-bootstrap/Container";
@@ -19,10 +19,17 @@ const Header = () => {
     </Tooltip>
   );
 
-  const { user, googleLogin, logOut } = useContext(AuthContext);
+  const { user, googleLogin, logOut, gitLogin } = useContext(AuthContext);
 
   const googleProvider = new GoogleAuthProvider();
-
+  const gitProvider = new GithubAuthProvider();
+  const handelGitleLogin = () =>{
+    gitLogin(gitProvider)
+      .then((result) => {
+        console.log(user);
+      })
+      .catch((error) => console.error(error));
+  }
   const handelGoogleLogin =() =>{
         googleLogin(googleProvider)
         .then(result =>{
@@ -49,12 +56,13 @@ const Header = () => {
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
-              <Nav className="me-auto">
-                <Button onClick={handelGoogleLogin} variant="warning">
-                  Google Login
-                </Button>
-              </Nav>
-
+              <Nav className="me-auto"></Nav>
+              <Button onClick={handelGoogleLogin} variant="warning">
+                Google Login
+              </Button>{" "}
+              <Button onClick={handelGitleLogin} variant="warning">
+                Git Login
+              </Button>{" "}
               <Nav>
                 <Nav.Link>
                   {user?.uid ? (
