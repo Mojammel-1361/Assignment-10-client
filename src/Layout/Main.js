@@ -5,6 +5,7 @@ import Col from "react-bootstrap/Col";
 import { Outlet } from 'react-router-dom';
 import Header from '../Pages/Sharde/Header/Header';
 import SideNav from '../Pages/Sharde/SideNav/SideNav';
+import Footer from '../Pages/Sharde/Footer/Footer';
 
 const Main = () => {
     return (
@@ -21,6 +22,7 @@ const Main = () => {
             </Col>
           </Row>
         </Container>
+        <Footer></Footer>
       </div>
     );
 };

@@ -1,24 +1,41 @@
-import React from 'react';
+import { GoogleAuthProvider } from 'firebase/auth';
+import React, { useContext } from 'react';
+import { Button, Image } from 'react-bootstrap';
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../../context/AuthProvider/AuthProvider';
 import SideNav from '../SideNav/SideNav';
+import { FaUserAlt } from "react-icons/fa";
 
 const Header = () => {
+  const { user, googleLogin } = useContext(AuthContext);
+  const googleProvider = new GoogleAuthProvider();
+  const handelGoogleLogin =() =>{
+        googleLogin(googleProvider)
+        .then(result =>{
+          console.log(user);
+        })
+        .catch(error => console.error(error))
+  }
+
     return (
       <div className="mb-4">
-        <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+        <Navbar collapseOnSelect expand="lg" bg="primary" variant="light">
           <Container>
             <Navbar.Brand>
-              {" "}
-              <Link to='/'>P-Language</Link>{" "}
+              <Button variant="warning">
+                <Link to="/">P-Language Course</Link>
+              </Button>
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
               <Nav className="me-auto">
-                <Nav.Link href="#features">All Course</Nav.Link>
+                <Button onClick={handelGoogleLogin} variant="warning">
+                  Google Login
+                </Button>
                 <Nav.Link href="#pricing">Pricing</Nav.Link>
                 <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
                   <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
@@ -35,9 +52,16 @@ const Header = () => {
                 </NavDropdown>
               </Nav>
               <Nav>
-                <Nav.Link href="#deets">More deets</Nav.Link>
+                <Nav.Link>{user?.displayName}</Nav.Link>
                 <Nav.Link eventKey={2} href="#memes">
-                  Dank memes
+                  {user?.photoURL?
+                  <Image style={{width:'30px'}} 
+                  roundedCircle 
+                  src={user.photoURL}
+                  ></Image>
+                  :
+                  <FaUserAlt></FaUserAlt>
+                  }
                 </Nav.Link>
               </Nav>
               <div className="d-lg-none">

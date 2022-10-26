@@ -6,7 +6,7 @@ const Home = () => {
   const AllCourses = useLoaderData();
   return (
     <div>
-      <h3>my courses all data Home:</h3>
+      <h3>Here is our all course list: {AllCourses.length}</h3>
       {AllCourses.map((courses) => (
         <Card key={courses._id} courses={courses}></Card>
       ))}

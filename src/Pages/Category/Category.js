@@ -8,9 +8,6 @@ const Category = () => {
 
   return (
     <div>
-      <div>
-        <h3>cat: {AllCourses.length}</h3>
-      </div>
       {AllCourses.map((courses) => (
         <Card key={courses._id} courses={courses}></Card>
       ))}

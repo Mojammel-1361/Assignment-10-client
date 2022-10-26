@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import Button from "react-bootstrap/Button";
 
 
 const SideNav = () => {
@@ -14,9 +15,16 @@ const SideNav = () => {
       <div>
         <div>All Course: {categorys.length}</div>
         <div>
-          {categorys.map((category) => (  
+          {categorys.map((category) => (
             <p key={category.id}>
-              <Link to={`/category/${category.id}`}>{category.name}</Link>
+              <Button
+                variant="light "
+                size="md"
+                className="w-5"
+                style={{ width: "200px" }}
+              >
+                <Link to={`/category/${category.id}`}>{category.name}</Link>
+              </Button>
             </p>
           ))}
         </div>

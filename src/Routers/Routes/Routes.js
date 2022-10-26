@@ -25,6 +25,7 @@ export const routes = createBrowserRouter([
         loader: ({ params }) =>
           fetch(`https://code-sarver.vercel.app/courses/${params.id}`),
       },
+     
     ],
   },
 ]);
