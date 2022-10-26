@@ -5,6 +5,7 @@ import Home from "../../Pages/Home/Home/Home";
 import Courses from '../../Pages/Courses/Courses';
 import Login from "../../Pages/Login/Login/Login";
 import Register from "../../Pages/Login/Register/Register";
+import PrivetRoute from "../PrivetRoute/PrivetRoute";
 export const routes = createBrowserRouter([
   {
     path: "/",
@@ -23,19 +24,22 @@ export const routes = createBrowserRouter([
       },
       {
         path: "/courses/:id",
-        element: <Courses></Courses>,
+        element: (
+          <PrivetRoute>
+            <Courses></Courses>
+          </PrivetRoute>
+        ),
         loader: ({ params }) =>
           fetch(`https://code-sarver.vercel.app/courses/${params.id}`),
       },
       {
         path: "/login",
-        element: <Login></Login>
+        element: <Login></Login>,
       },
       {
         path: "/register",
-        element: <Register></Register>
+        element: <Register></Register>,
       },
-     
     ],
   },
 ]);
