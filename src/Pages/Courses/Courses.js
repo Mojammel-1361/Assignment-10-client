@@ -5,13 +5,13 @@ import Card from 'react-bootstrap/Card';
 
 const Courses = () => {
     const courses = useLoaderData();
-    const { title, details, image_url, category_id } = courses; 
+    const { title, details, image_url, category_id, total_view } = courses; 
     
     return (
       <div>
         <h2> Courses Details </h2>
         <div>
-          <Card style={{ width: "900px" }}>
+          <Card style={{ width: "800px" }}>
             <Card.Img
               variant="top"
               src={image_url}
@@ -20,6 +20,10 @@ const Courses = () => {
             <Card.Body>
               <Card.Title>{title}</Card.Title>
               <Card.Text>{details}</Card.Text>
+              <Card.Text>
+                <Button variant="outline-success">Price: ${total_view}</Button>{" "}
+              </Card.Text>
+
               <Link to={`/category/${category_id}`}>
                 <Button variant="primary">Back to Details</Button>
               </Link>

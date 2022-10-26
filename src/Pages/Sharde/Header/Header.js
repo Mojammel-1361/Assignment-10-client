@@ -56,13 +56,15 @@ const Header = () => {
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
-              <Nav className="me-auto"></Nav>
-              <Button onClick={handelGoogleLogin} variant="warning">
-                Google Login
-              </Button>{" "}
-              <Button onClick={handelGitleLogin} variant="warning">
-                Git Login
-              </Button>{" "}
+              <Nav.Link className="me-auto">
+                {/* <Button onClick={handelGoogleLogin} variant="warning" size="sm">
+                  Google Login
+                </Button>{" "}
+                <Button onClick={handelGitleLogin} variant="warning" size="sm">
+                  Git Login
+                </Button>{" "} */}
+              </Nav.Link>
+
               <Nav>
                 <Nav.Link>
                   {user?.uid ? (
@@ -78,12 +80,24 @@ const Header = () => {
                     </>
                   ) : (
                     <>
-                      <Button variant="warning">
-                        <Link bg="" to="/login">
-                          Login
-                        </Link>
+                      <Button
+                        onClick={handelGoogleLogin}
+                        variant="warning"
+                        size="sm"
+                      >
+                        Google Login
                       </Button>{" "}
-                      <Button variant="warning">
+                      <Button
+                        onClick={handelGitleLogin}
+                        variant="warning"
+                        size="sm"
+                      >
+                        Git Login
+                      </Button>{" "}
+                      <Button variant="warning" size="sm">
+                        <Link to="/login">Login</Link>
+                      </Button>{" "}
+                      <Button variant="warning" size="sm">
                         <Link to="/register">Register</Link>
                       </Button>{" "}
                     </>
@@ -92,7 +106,7 @@ const Header = () => {
                 <Nav.Link eventKey={2} href="#memes">
                   {user?.photoURL ? (
                     <OverlayTrigger
-                      placement="left"
+                      placement="bottom"
                       delay={{ show: 250, hide: 400 }}
                       overlay={renderTooltip}
                     >
