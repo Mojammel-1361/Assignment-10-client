@@ -11,19 +11,19 @@ export const routes = createBrowserRouter([
       {
         path: "/",
         element: <Home></Home>,
-        loader: () => fetch("http://localhost:9000/courses"),
+        loader: () => fetch("https://code-sarver.vercel.app/courses"),
       },
       {
         path: "/category/:id",
         element: <Category></Category>,
         loader: ({ params }) =>
-          fetch(`http://localhost:9000/category/${params.id}`),
+          fetch(`https://code-sarver.vercel.app/category/${params.id}`),
       },
       {
         path: "/courses/:id",
         element: <Courses></Courses>,
         loader: ({ params }) =>
-          fetch(`http://localhost:9000/courses/${params.id}`),
+          fetch(`https://code-sarver.vercel.app/courses/${params.id}`),
       },
     ],
   },

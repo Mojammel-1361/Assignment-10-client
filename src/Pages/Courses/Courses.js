@@ -15,7 +15,7 @@ const Courses = () => {
             <Card.Img
               variant="top"
               src={image_url}
-              style={{ width: "900px" }}
+              style={{ width: "700px" }}
             />
             <Card.Body>
               <Card.Title>{title}</Card.Title>
