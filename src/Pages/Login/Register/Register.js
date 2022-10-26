@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../context/AuthProvider/AuthProvider';
 
 const Register = () => {
@@ -70,9 +71,11 @@ const Register = () => {
               placeholder="Password"
               required
             />
-          <span className="text-danger">{error}</span>
+            <span className="text-danger">{error}</span>
           </Form.Group>
-
+          <p>
+            <Link to="/login">Already Have account</Link>{" "}
+          </p>
           <Button variant="primary" type="submit">
             Reguster
           </Button>

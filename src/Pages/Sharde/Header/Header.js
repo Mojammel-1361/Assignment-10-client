@@ -1,5 +1,5 @@
 import { GithubAuthProvider, GoogleAuthProvider } from 'firebase/auth';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Button, Image } from 'react-bootstrap';
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
@@ -10,9 +10,14 @@ import SideNav from '../SideNav/SideNav';
 import { FaUserAlt } from "react-icons/fa";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
+import DarkModeToggle from "react-dark-mode-toggle";
 
 
 const Header = () => {
+  const [isDarkMode, setIsDarkMode] = useState(() => false);
+
+
+
   const renderTooltip = (props) => (
     <Tooltip id="button-tooltip" {...props}>
       {user?.displayName}
@@ -52,6 +57,13 @@ const Header = () => {
             <Navbar.Brand>
               <Button variant="warning">
                 <h4>P_Language Course</h4>
+              </Button>
+              <Button>
+                <DarkModeToggle
+                  onChange={setIsDarkMode}
+                  checked={isDarkMode}
+                  size={80}
+                />
               </Button>
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />

@@ -1,13 +1,32 @@
+import { GithubAuthProvider, GoogleAuthProvider } from 'firebase/auth';
 import React from 'react';
 import { useContext, useState } from 'react';
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../context/AuthProvider/AuthProvider';
 
 const Login = () => {
     const [error,  setError] = useState('');
-    const {signIn}= useContext(AuthContext)
+    const { user, signIn, googleLogin, gitLogin } = useContext(AuthContext);
+
+    const gitProvider = new GithubAuthProvider();
+    const handelGitleLogin = () => {
+      gitLogin(gitProvider)
+        .then((result) => {
+          console.log(user);
+        })
+        .catch((error) => console.error(error));
+    };
+    
+    const googleProvider = new GoogleAuthProvider();
+     const handelGoogleLogin = () => {
+       googleLogin(googleProvider)
+         .then((result) => {
+           console.log(user);
+         })
+         .catch((error) => console.error(error));
+     };
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -43,7 +62,6 @@ const Login = () => {
               required
             />
           </Form.Group>
-
           <Form.Group className="mb-3" controlId="formBasicPassword">
             <Form.Label>Password</Form.Label>
             <Form.Control
@@ -52,13 +70,29 @@ const Login = () => {
               placeholder="Password"
               required
             />
-          <span className='text-danger'>{error}</span>
+            <span className="text-danger">{error}</span>
           </Form.Group>
+          <p>
+            No-Account <Link to="/register">Register Now</Link>{" "}
+          </p>
           <Button variant="primary" type="submit">
             Submit
-          </Button>
+          </Button>{" "}
+          <Button
+            onClick={handelGoogleLogin}
+            variant="outline-warning"
+            type="submit"
+          >
+            Google
+          </Button>{" "}
+          <Button
+            onClick={handelGitleLogin}
+            variant="outline-success"
+            type="submit"
+          >
+            GitHub
+          </Button>{" "}
         </Form>
-    
       </div>
     );
 };

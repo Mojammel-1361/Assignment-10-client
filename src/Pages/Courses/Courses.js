@@ -3,19 +3,21 @@ import { Link, useLoaderData } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 
+
 const Courses = () => {
     const courses = useLoaderData();
-    const { title, details, image_url, category_id, total_view } = courses; 
+    const { title, details, image_url, category_id, total_view } = courses;
+    
     
     return (
       <div>
         <h2> Courses Details </h2>
         <div>
-          <Card style={{ width: "800px" }}>
+          <Card style={{ width: "860px" }}>
             <Card.Img
               variant="top"
               src={image_url}
-              style={{ width: "700px" }}
+              style={{ width: "860px" }}
             />
             <Card.Body>
               <Card.Title>{title}</Card.Title>
@@ -29,8 +31,10 @@ const Courses = () => {
               </Link>
             </Card.Body>
           </Card>
+          
         </div>
       </div>
+      
     );
 };
 
