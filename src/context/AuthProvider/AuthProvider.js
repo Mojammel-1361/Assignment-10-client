@@ -1,6 +1,6 @@
 import React from 'react';
 import { createContext, useEffect } from 'react';
-import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut,  updateProfile } from "firebase/auth";
 import app from '../../fairbase/fairbase.config';
 import { useState } from 'react';
 
@@ -12,6 +12,10 @@ const auth = getAuth(app);
 const AuthProvider = ({children}) => {
     const [user,  setUser] = useState(null);
     const [loading, setLoading] =useState(true);
+
+    const updatUserProfile = (profile) =>{
+        return updateProfile(auth.currentUser, profile);
+    }
 
     const signIn =(email, password) =>{
         setLoading(true);
@@ -57,6 +61,7 @@ const AuthProvider = ({children}) => {
       createUser,
       signIn,
       gitLogin,
+      updatUserProfile, 
     };
     return (
       <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>

@@ -6,6 +6,7 @@ import Courses from '../../Pages/Courses/Courses';
 import Login from "../../Pages/Login/Login/Login";
 import Register from "../../Pages/Login/Register/Register";
 import PrivetRoute from "../PrivetRoute/PrivetRoute";
+import Blog from '../../Blog/Blog';
 export const routes = createBrowserRouter([
   {
     path: "/",
@@ -18,7 +19,11 @@ export const routes = createBrowserRouter([
       },
       {
         path: "/category/:id",
-        element: <Category></Category>,
+        element: (
+          <PrivetRoute>
+            <Category></Category>
+          </PrivetRoute>
+        ),
         loader: ({ params }) =>
           fetch(`https://code-sarver.vercel.app/category/${params.id}`),
       },
@@ -39,6 +44,10 @@ export const routes = createBrowserRouter([
       {
         path: "/register",
         element: <Register></Register>,
+      },
+      {
+        path: "/blog",
+        element: <Blog></Blog>,
       },
     ],
   },

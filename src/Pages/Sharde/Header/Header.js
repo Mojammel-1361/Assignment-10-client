@@ -51,18 +51,18 @@ const Header = () => {
           <Container>
             <Navbar.Brand>
               <Button variant="warning">
-                <Link to="/">P-Language Course</Link>
+                <h4>P_Language Course</h4>
               </Button>
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
               <Nav.Link className="me-auto">
-                {/* <Button onClick={handelGoogleLogin} variant="warning" size="sm">
-                  Google Login
+                <Button variant="warning" size="sm">
+                  <Link to="/">Courses</Link>
                 </Button>{" "}
-                <Button onClick={handelGitleLogin} variant="warning" size="sm">
-                  Git Login
-                </Button>{" "} */}
+                <Button variant="warning" size="sm">
+                  <Link to="/blog">Blog</Link>
+                </Button>{" "}
               </Nav.Link>
 
               <Nav>
@@ -103,7 +103,7 @@ const Header = () => {
                     </>
                   )}
                 </Nav.Link>
-                <Nav.Link eventKey={2} href="#memes">
+                <Nav.Link eventKey={2}>
                   {user?.photoURL ? (
                     <OverlayTrigger
                       placement="bottom"
