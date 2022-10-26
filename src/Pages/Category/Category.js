@@ -1,12 +1,16 @@
 import React from "react";
+import Card from "../../Pages/Sharde/card/card";
 import { useLoaderData } from "react-router-dom";
-import Card from "../../Sharde/card/card";
 
-const Home = () => {
+
+const Category = () => {
   const AllCourses = useLoaderData();
+
   return (
     <div>
-      <h3>my courses all data Home:</h3>
+      <div>
+        <h3>cat: {AllCourses.length}</h3>
+      </div>
       {AllCourses.map((courses) => (
         <Card key={courses._id} courses={courses}></Card>
       ))}
@@ -14,4 +18,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Category;

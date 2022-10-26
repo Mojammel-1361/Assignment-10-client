@@ -3,19 +3,20 @@ import { Link } from 'react-router-dom';
 
 
 const SideNav = () => {
-    const [catagorys, setCatagorys] = useState([]);
+    const [categorys, setCategorys] = useState([]);
+
     useEffect(() => {
-        fetch("http://localhost:9000/corse")
-        .then(res => res.json())
-        .then(data => setCatagorys(data));
+        fetch("http://localhost:9000/course")
+          .then((res) => res.json())
+          .then((data) => setCategorys(data));
     })
     return (
       <div>
-        <div>All Course{catagorys.length}</div>
+        <div>All Course: {categorys.length}</div>
         <div>
-          {catagorys.map((catagory) => (
-            <p key={catagory.id}>
-              <Link to={`/course/${catagory.id}`}>{catagory.name}</Link>
+          {categorys.map((category) => (  
+            <p key={category.id}>
+              <Link to={`/category/${category.id}`}>{category.name}</Link>
             </p>
           ))}
         </div>
