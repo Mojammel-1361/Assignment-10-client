@@ -9,8 +9,17 @@ import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../context/AuthProvider/AuthProvider';
 import SideNav from '../SideNav/SideNav';
 import { FaUserAlt } from "react-icons/fa";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Tooltip from "react-bootstrap/Tooltip";
+
 
 const Header = () => {
+  const renderTooltip = (props) => (
+    <Tooltip id="button-tooltip" {...props}>
+      {user?.displayName}
+    </Tooltip>
+  );
+
   const { user, googleLogin } = useContext(AuthContext);
   const googleProvider = new GoogleAuthProvider();
   const handelGoogleLogin =() =>{
@@ -54,14 +63,21 @@ const Header = () => {
               <Nav>
                 <Nav.Link>{user?.displayName}</Nav.Link>
                 <Nav.Link eventKey={2} href="#memes">
-                  {user?.photoURL?
-                  <Image style={{width:'30px'}} 
-                  roundedCircle 
-                  src={user.photoURL}
-                  ></Image>
-                  :
-                  <FaUserAlt></FaUserAlt>
-                  }
+                  {user?.photoURL ? (
+                    <OverlayTrigger
+                      placement="left"
+                      delay={{ show: 250, hide: 400 }}
+                      overlay={renderTooltip}
+                    >
+                      <Image
+                        style={{ width: "30px" }}
+                        roundedCircle
+                        src={user.photoURL}
+                      ></Image>
+                    </OverlayTrigger>
+                  ) : (
+                    <FaUserAlt></FaUserAlt>
+                  )}
                 </Nav.Link>
               </Nav>
               <div className="d-lg-none">
