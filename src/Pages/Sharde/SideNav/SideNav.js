@@ -13,7 +13,7 @@ const SideNav = () => {
     })
     return (
       <div>
-        <div>All Course: {categorys.length}</div>
+        {/* <div>Course: {categorys.length}</div> */}
         <div>
           {categorys.map((category) => (
             <p key={category.id}>

@@ -49,6 +49,10 @@ export const routes = createBrowserRouter([
         path: "/blog",
         element: <Blog></Blog>,
       },
+      {
+        path: "*",
+        element: <div>This Route Not found place re-check</div>,
+      },
     ],
   },
 ]);
