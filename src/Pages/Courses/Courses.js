@@ -1,12 +1,15 @@
-import React from 'react';
+
 import { Link, useLoaderData } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 
 
+
 const Courses = () => {
     const courses = useLoaderData();
     const { title, details, image_url, category_id, total_view } = courses;
+
+      
     
     
     return (
@@ -31,10 +34,9 @@ const Courses = () => {
               </Link>
             </Card.Body>
           </Card>
-          
         </div>
+        
       </div>
-      
     );
 };
 
